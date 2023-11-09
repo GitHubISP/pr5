@@ -1,0 +1,46 @@
+from fastapi import FastAPI, status
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+
+engine = create_engine("sqlite:///todooo.db")
+
+
+Base = declarative_base()
+
+
+class ToDo(Base):
+   __tablename__ = 'todos'
+   id = Column(Integer, primary_key=True)
+   task = Column(String(256))
+
+
+Base.metadata.create_all(engine)
+
+
+app = FastAPI()
+
+# GET /api/list 
+@app.get("/api/list")
+def read_todo_list():
+ 
+   pass
+
+# POST /api/list/
+@app.post("/api/list/", status_code=status.HTTP_201_CREATED)
+def create_todo():
+
+   pass
+
+# PUT/UPDATE /api/list/:id 
+@app.put("/api/list/{id}")
+def update_todo(id: int):
+
+   pass
+
+# DELETE /api/list/:id
+@app.delete("/api/list/{id}")
+def delete_todo(id: int):
+
+   pass
